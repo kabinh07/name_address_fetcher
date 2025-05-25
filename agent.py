@@ -16,18 +16,16 @@ def exec_time(func):
 class Fetcher:
     def __init__(self):
         self.model = ChatOllama(model=LLM_MODEL, base_url=LLM_BASE_URL, temperature=LLM_TEMPERATURE)
-        print(self.model)
+        print(f"MODEL CONFIGURATION: {self.model}")
     
     @exec_time
     def extract_text(self, ocr_results):
         with open("prompt.txt", 'r') as f:
             prompt = f.read()
         prompt = PromptTemplate.from_template(prompt)
-        final_prompt = prompt.format(input=ocr_results)
-        print(f"Final Prompt: {final_prompt}")
+        final_prompt = prompt.format(input=ocr_results[:20])
         print("Invoking LLM...")
-        response = self.model.invoke(final_prompt).content
-        print(f"LLM Response: {response}")
+        response = self.model.invoke(final_prompt).content.split('</think>')[0].strip()
         return response
     
     
