@@ -25,7 +25,7 @@ class Fetcher:
         prompt = PromptTemplate.from_template(prompt)
         final_prompt = prompt.format(input=ocr_results[:20])
         print("Invoking LLM...")
-        response = self.model.invoke(final_prompt).content.split('</think>')[0].strip()
+        response = self.model.invoke(final_prompt).content.split('</think>')[-1].strip()
         return response
     
     
