@@ -1,0 +1,15 @@
+services:
+  info-fetcher:
+    build: .
+    container_name: information-fetcher
+    ports:
+      - "8050:8000"
+    environment:
+      - .env
+    restart: always
+    healthcheck:
+      test: ["CMD", "curl", "-v", "http://localhost:8000/health"]
+      interval: 60s
+      timeout: 5s
+      retries: 2
+      start_period: 30s
