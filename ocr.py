@@ -34,7 +34,7 @@ class OCR:
                 results.append(result)
             except:
                 print("Error in OCR recognition for box:", box)
-        with open("ocr_results.json", 'w', encoding='utf-8') as f:
+        with open("test/ocr_results.json", 'w', encoding='utf-8') as f:
             json.dump(results, f, indent = 4)
         return results
         

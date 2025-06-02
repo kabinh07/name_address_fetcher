@@ -3,8 +3,6 @@ from langchain_core.prompts import PromptTemplate
 import time
 from config import LLM_MODEL, LLM_BASE_URL, LLM_TEMPERATURE, LLM_PROMPT_PATH
 
-print(LLM_PROMPT_PATH)
-
 def exec_time(func):
     def wrapper(*args, **kwargs):
         start_time = time.perf_counter()
@@ -18,10 +16,18 @@ def exec_time(func):
 class Fetcher:
     def __init__(self):
         self.model = ChatOllama(model=LLM_MODEL, base_url=LLM_BASE_URL, temperature=LLM_TEMPERATURE)
-        print(f"MODEL CONFIGURATION: {self.model}")
+
+    def invoke_model(self, prompt, ocr_results):
+        prompt = PromptTemplate.from_template(prompt)
+        final_prompt = prompt.format(input=ocr_results)
+        return self.model.invoke(final_prompt).content
     
     @exec_time
     def extract_text(self, ocr_results):
+        llm_prompt_path = LLM_PROMPT_PATH.split(';') # split paths by ; if you have multiple prompts
+        if len(llm_prompt_path) > 1:
+            
+
         with open(LLM_PROMPT_PATH, 'r') as f:
             prompt = f.read()
         prompt = PromptTemplate.from_template(prompt)
