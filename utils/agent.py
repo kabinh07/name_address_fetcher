@@ -23,12 +23,12 @@ class Fetcher:
         """
         self.model = ChatOllama(model=LLM_MODEL, base_url=LLM_BASE_URL, temperature=LLM_TEMPERATURE, timeout=300)
         self.prompt_map = {
-            "salary_certificate": "prompts/salary_certificate.txt",
-            "pay_slip": "prompts/pay_slip.txt",
-            "job_id_card": "prompts/job_id_card.txt",
-            "trade_license": "prompts/trade_license.txt",
-            "rental_deed": "prompts/rental_deed.txt",
-            "utility_bill": "prompts/utility_bill.txt"
+            "Salary Certificate": "prompts/salary_certificate.txt",
+            "Pay Slip": "prompts/pay_slip.txt",
+            "Job ID Card": "prompts/job_id_card.txt",
+            "Trade License": "prompts/trade_license.txt",
+            "Rental Deed": "prompts/rental_deed.txt",
+            "Utility Bill": "prompts/utility_bill.txt"
         }
 
     def invoke_model(self, prompt, ocr_results):
